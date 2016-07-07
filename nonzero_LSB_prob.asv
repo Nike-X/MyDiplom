@@ -1,0 +1,13 @@
+function [ irregularity ] = nonzero_LSB_prob(lsbBlocks)
+
+dctBlocks2 = lsbBlocks;
+% dctBlocks2(dctBlocks2==0) = NaN;
+% dctBlocks2(~isnan(dctBlocks2)) = 1;
+% dctBlocks2(isnan(dctBlocks2)) = 0;
+dctDensity = sum(dctBlocks2,3);
+%res1 = dctDensity/max(max(dctDensity));
+
+figure, imshow(dctDensity/max(max(dctDensity)),'InitialMagnification',1500);
+impixelregion
+
+end

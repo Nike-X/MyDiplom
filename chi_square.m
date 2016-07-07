@@ -1,0 +1,28 @@
+function [chi_square] = chi_square(dctBlocks)
+
+dctBlocks2 = dctBlocks(:);
+% chi_square = 1;
+dctBlocksVal = [];
+for i = 1:size(dctBlocks2,1)-1
+    dctBlocksVal = cat(1, dctBlocksVal, (dctBlocks2(i) + dctBlocks2(i+1))/2);
+end
+
+binranges = -20:20;
+[bincounts] = histc(dctBlocks(:),binranges)
+[bincounts_exp] = histc(dctBlocks2,binranges)
+
+chi_square = sum((bincounts - bincounts_exp)./bincounts_exp);
+
+
+range = max(dctBlocks2)-min(dctBlocks2)+1;
+
+figure
+hist(dctBlocks2,range)
+axis([-20 20 0 1500]);
+
+figure
+hist(dctBlocks(:),range)
+axis([-20 20 0 1500]);
+
+
+end
